@@ -13,7 +13,7 @@ import { map } from 'rxjs/operators';
 })
 export class HomeComponent implements OnInit {
   title = 'nbwl-projects';
-  public currentTab = 'Stories';
+  public currentTab = 'Map';
   public csvData: FeatureCollection = {
     type: 'FeatureCollection',
     features: []
