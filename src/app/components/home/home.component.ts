@@ -156,6 +156,7 @@ export class HomeComponent implements OnInit {
 
   goToMapTab() {
     this.changeTab('Map');
+    this.openPopUp();
   }
 
   goToStoryTab() {
