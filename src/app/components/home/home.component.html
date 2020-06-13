@@ -15,7 +15,7 @@
     (slide)="onSlide($event)">
     <ng-template ngbSlide *ngFor="let record of csvData.features; index as i">
       <div class="row justify-content-center page-content overflow-auto bg-dark text-white">
-        <div class="col-8">
+        <div class="col-8 pt-3 pb-5">
           <h3>{{csvData.features[selectedIndex]?.properties?.Area}}</h3>
           <h5>
             {{csvData.features[selectedIndex]?.properties?.State}} - 
