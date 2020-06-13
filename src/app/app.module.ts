@@ -6,10 +6,12 @@ import { AppComponent } from './app.component';
 import { AppIconsModule } from './app.icons.module';
 import { DataService } from 'src/services/data.service';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

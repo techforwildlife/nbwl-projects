@@ -1,0 +1,41 @@
+<div class="w-100 h-100">
+  <nav class="nav nav-tabs nav-fill bg-light">
+    <a class="nav-item nav-link" role="button"
+      (click)="changeTab('Stories')"
+      [ngClass]="{ 'active': currentTab === 'Stories' }">
+      Stories
+    </a>
+    <a class="nav-item nav-link" role="button"
+      (click)="changeTab('Map')"
+      [ngClass]="{ 'active': currentTab === 'Map' }">
+      Map
+    </a>
+  </nav>
+  
+  <div class="carousel slide bg-dark w-100 h-50" *ngIf="currentTab === 'Stories'">
+    <div class="carousel-inner w-100 h-100">
+      <div class="carousel-item">
+        1
+      </div>
+      <div class="carousel-item active">
+        2
+      </div>
+      <div class="carousel-item">
+        3
+      </div>
+    </div>
+    <a class="carousel-control-prev" role="button" data-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="carousel-control-next" role="button" data-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+  
+  <div *ngIf="currentTab === 'Map'">
+    Map
+  </div>
+</div>
+  
