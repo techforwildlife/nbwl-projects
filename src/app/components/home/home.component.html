@@ -1,16 +1,4 @@
-<div class="w-100 h-100">  
-  <nav class="nav nav-tabs nav-fill bg-light nav-bar-size">
-    <a class="nav-item nav-link" role="button"
-      (click)="changeTab('Map')"
-      [ngClass]="{ 'active': currentTab === 'Map' }">
-      Map
-    </a>
-    <a class="nav-item nav-link" role="button"
-      (click)="changeTab('Stories')"
-      [ngClass]="{ 'active': currentTab === 'Stories' }">
-      Stories
-    </a>
-  </nav>
+<div class="w-100 h-100">
 
   <ngb-carousel #carousel class="page-content w-100" [hidden]="currentTab !== 'Stories'"
       [showNavigationIndicators]="'true'"
@@ -32,5 +20,20 @@
     </div>
 
   </div>
+  
+  <nav class="nav nav-tabs nav-fill bg-light nav-bar-size">
+    <a class="nav-item nav-link" role="button"
+      *ngIf="currentTab === 'Map'"
+      (click)="changeTab('Stories')"
+      [ngClass]="{ 'active': currentTab === 'Stories' }">
+      Story detail
+    </a>
+    <a class="nav-item nav-link" role="button"
+      *ngIf="currentTab === 'Stories'"
+      (click)="changeTab('Map')"
+      [ngClass]="{ 'active': currentTab === 'Map' }">
+      View in Map
+    </a>
+  </nav>
 </div>
   
