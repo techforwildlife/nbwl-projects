@@ -3,18 +3,10 @@
   <div #mapEl class="w-100 h-100"></div>
   <div #mapPopupEl class="map-popup">
     <h5>{{csvData.features[selectedIndex]?.properties?.Area}}</h5>
-    <h6>
-      State: {{csvData.features[selectedIndex]?.properties?.State}}
-    </h6>
-    <h7>
-      Infrastructure type: {{csvData.features[selectedIndex]?.properties?.Type_of_Infrastructure}}
-    </h7><br>
-    <h7>
-      Area covered: {{csvData.features[selectedIndex]?.properties?.Area_to_be_cleared_in_ha}} ha
-    </h7><br>
-    <h7>
-      Agency: {{csvData.features[selectedIndex]?.properties?.Agency}}
-    </h7>
+    <b>State:</b> {{csvData.features[selectedIndex]?.properties?.State}}<br>
+    <b>Infrastructure type:</b> {{csvData.features[selectedIndex]?.properties?.Type_of_Infrastructure}}<br>
+    <b>Area covered:</b> {{csvData.features[selectedIndex]?.properties?.Area_to_be_cleared_in_ha}} ha<br>
+    <b>Agency:</b> {{csvData.features[selectedIndex]?.properties?.Agency}}
   </div>
 </div>
 
@@ -29,6 +21,10 @@
             {{csvData.features[selectedIndex]?.properties?.State}} - 
             {{csvData.features[selectedIndex]?.properties?.Proposed_Project}}
           </h5>
+          <h6>
+            {{csvData.features[selectedIndex]?.properties?.Agency}} - 
+            {{csvData.features[selectedIndex]?.properties?.Area_to_be_cleared_in_ha}} ha
+          </h6>
           <hr class="border border-white m-0">
           {{record.properties?.Story}}
         </div>

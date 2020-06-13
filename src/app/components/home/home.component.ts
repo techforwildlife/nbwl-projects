@@ -57,8 +57,8 @@ export class HomeComponent implements OnInit {
 
     this.map = new Map({
       container: this.mapEl.nativeElement,
-      center: { lng: 74.1240, lat: 15.2993 },
-      zoom: 10,
+      center: { lng: 78.99931, lat: 19.1193 },
+      zoom: 3,
     });
     this.map.addSource('base-map-source', {
       type: 'raster',
@@ -110,7 +110,7 @@ export class HomeComponent implements OnInit {
       featureCollection.features.push(feature);
     });
     this.csvData = featureCollection;
-    this.selectedIndex = 0;
+    this.selectedIndex = this.csvData.features.length >= 7 ? 7 : 0;
     this.carousel.pause();
     console.log(featureCollection);
     this.map.addSource('geojson-source', {
