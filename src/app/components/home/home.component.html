@@ -2,7 +2,7 @@
 
   <div #mapEl class="w-100 h-100"></div>
   <div #mapPopupEl class="map-popup">
-    <h3>{{csvData.features[selectedIndex]?.properties?.index}}</h3>
+    <h3>Story - {{csvData.features[selectedIndex]?.properties?.index}}</h3>
     {{csvData.features[selectedIndex]?.properties?.Story}}
   </div>
 </div>
@@ -13,14 +13,14 @@
     <ng-template ngbSlide *ngFor="let record of csvData.features; index as i">
       <div class="row justify-content-center page-content overflow-auto bg-dark text-white">
         <div class="col-8">
-          <h3>{{i}}</h3>
+          <h3>Story - {{i}}</h3>
           {{record.properties?.Story}}
         </div>
       </div>
     </ng-template>
 </ngb-carousel>
 
-<nav class="nav nav-tabs nav-fill bg-light nav-bar-size footer">
+<nav class="nav nav-tabs nav-fill bg-primary text-white nav-bar-size footer">
   <a class="nav-item nav-link" role="button"
     *ngIf="currentTab === 'Map'"
     (click)="goToStoryTab()">
