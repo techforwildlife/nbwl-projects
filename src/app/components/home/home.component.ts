@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { DataService } from 'src/services/data.service';
 import { Converter } from 'csvtojson/v2/Converter';
 import { FeatureCollection, Feature } from 'geojson';
+import { NgbCarousel, NgbSlideEvent } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,8 @@ export class HomeComponent implements OnInit {
     type: 'FeatureCollection',
     features: []
   };
-  public activeItemIndex = null;
+  public selectedIndex: number = null;
+  @ViewChild('carousel', {static : true}) carousel: NgbCarousel;
 
   constructor(private dataService: DataService) {
 
@@ -56,7 +58,8 @@ export class HomeComponent implements OnInit {
       featureCollection.features.push(feature);
     });
     this.csvData = featureCollection;
-    this.activeItemIndex = 0;
+    this.selectedIndex = 0;
+    this.carousel.pause();
     console.log(featureCollection);
   }
 
@@ -68,16 +71,13 @@ export class HomeComponent implements OnInit {
     this.currentTab = name;
   }
 
-  previousItem() {
-    if (this.activeItemIndex !== 0) {
-      this.activeItemIndex--;
-    }
+  onSlide(slideEvent: NgbSlideEvent) {
+    // tslint:disable-next-line: radix
+    this.selectedIndex = parseInt(slideEvent.current.split('-')[2]);
   }
 
-  nextItem() {
-    if (this.activeItemIndex < this.csvData.features.length - 1) {
-      this.activeItemIndex++;
-    }
+  selectSlide(index: number) {
+    this.carousel.select(`ngb-slide-${index}`);
   }
 
 }

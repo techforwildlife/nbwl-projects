@@ -1,43 +1,36 @@
 <div class="w-100 h-100">  
   <nav class="nav nav-tabs nav-fill bg-light nav-bar-size">
     <a class="nav-item nav-link" role="button"
-      (click)="changeTab('Stories')"
-      [ngClass]="{ 'active': currentTab === 'Stories' }">
-      Stories
-    </a>
-    <a class="nav-item nav-link" role="button"
       (click)="changeTab('Map')"
       [ngClass]="{ 'active': currentTab === 'Map' }">
       Map
     </a>
+    <a class="nav-item nav-link" role="button"
+      (click)="changeTab('Stories')"
+      [ngClass]="{ 'active': currentTab === 'Stories' }">
+      Stories
+    </a>
   </nav>
-  <div class="page-content bg-dark text-white">
-    <div class="carousel slide w-100 h-100" *ngIf="currentTab === 'Stories'">
-      <div class="carousel-inner w-100 h-100">
-        <div class="carousel-item  w-100 h-100" 
-        *ngFor="let record of csvData.features; index as i"
-        [ngClass]="{ 'active': i == activeItemIndex }">
-        <div class="row justify-content-center p-2 mx-10">
+
+  <ngb-carousel #carousel class="h-100 w-100" [hidden]="currentTab !== 'Stories'"
+      [showNavigationIndicators]="'true'"
+      (slide)="onSlide($event)">
+      <ng-template ngbSlide *ngFor="let record of csvData.features; index as i">
+        <div class="row justify-content-center page-content overflow-auto bg-dark text-white">
           <div class="col-8">
-            <h1>Title</h1>
+            <h3>{{i}}</h3>
             {{record.properties?.Story}}
           </div>
         </div>
-        </div>
-      </div>
-      <a class="carousel-control-prev" role="button" (click)="previousItem()">
-        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="carousel-control-next" role="button" (click)="nextItem()">
-        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
-    
+      </ng-template>
+    </ngb-carousel>
+
+  <div class="page-content overflow-auto">
+
     <div *ngIf="currentTab === 'Map'">
       Map
     </div>
+
   </div>
 </div>
   
