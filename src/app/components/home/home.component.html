@@ -1,7 +1,7 @@
 <div class="page-content overflow-auto" [hidden]="currentTab !== 'Map'">
 
   <div #mapEl class="w-100 h-100"></div>
-
+  <div #mapPopupEl class="map-popup">{{csvData.features[selectedIndex]?.properties?.Story}}</div>
 </div>
 
 <ngb-carousel #carousel class="page-content w-100" [hidden]="currentTab !== 'Stories'"

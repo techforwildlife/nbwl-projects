@@ -13,13 +13,19 @@ import { map } from 'rxjs/operators';
 })
 export class HomeComponent implements OnInit {
   title = 'nbwl-projects';
+
   public currentTab = 'Map';
+  public selectedIndex: number = null;
+
   public csvData: FeatureCollection = {
     type: 'FeatureCollection',
     features: []
   };
-  public selectedIndex: number = null;
+
   map: Map = null;
+  mapPopup: Popup;
+  @ViewChild('mapPopupEl', { static: true }) mapPopupEl: ElementRef<HTMLDivElement>;
+
   @ViewChild('carousel', {static : true}) carousel: NgbCarousel;
   @ViewChild('mapEl', { static: true }) mapEl: ElementRef<HTMLDivElement>;
 
@@ -44,6 +50,11 @@ export class HomeComponent implements OnInit {
   }
 
   initMap() {
+    this.mapPopup = new Popup({
+      closeButton: true,
+      closeOnClick: false
+    });
+
     this.map = new Map({
       container: this.mapEl.nativeElement,
       center: { lng: 74.1240, lat: 15.2993 },
@@ -66,6 +77,17 @@ export class HomeComponent implements OnInit {
       type: 'raster',
       source: 'base-map-source'
     });
+
+    this.map.on('click', (e) => {
+      const features = this.map.queryRenderedFeatures([
+        [e.point.x - 5 / 2, e.point.y - 5 / 2],
+        [e.point.x + 5 / 2, e.point.y + 5 / 2]
+      ]);
+      if (features[0]) {
+        this.openPopUp(features[0]);
+      }
+    });
+
   }
 
   initMapData(data: any[]) {
@@ -115,16 +137,25 @@ export class HomeComponent implements OnInit {
         ]
       }
     });
+    this.openPopUp();
   }
 
-  goToLocation() {
-    const selectedLocation = this.csvData.features[this.selectedIndex];
-    console.log(selectedLocation);
+
+
+  openPopUp(featureData?: Feature) {
+    if (featureData) {
+      this.selectedIndex = featureData.properties.index;
+    }
+    const selectedData = this.csvData.features[this.selectedIndex];
+    // tslint:disable-next-line: no-string-literal
+    const coordinates = selectedData.geometry['coordinates'];
+    this.map.flyTo({ center: coordinates });
+    this.mapPopup.setLngLat(coordinates).setDOMContent(this.mapPopupEl.nativeElement).addTo(this.map);
   }
+
 
   goToMapTab() {
     this.changeTab('Map');
-    this.goToLocation();
   }
 
   goToStoryTab() {
