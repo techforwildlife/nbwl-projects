@@ -11,7 +11,11 @@ import { FeatureCollection, Feature } from 'geojson';
 export class HomeComponent implements OnInit {
   title = 'nbwl-projects';
   public currentTab = 'Stories';
-  public csvData = [];
+  public csvData: FeatureCollection = {
+    type: 'FeatureCollection',
+    features: []
+  };
+  public activeItemIndex = null;
 
   constructor(private dataService: DataService) {
 
@@ -21,7 +25,6 @@ export class HomeComponent implements OnInit {
     this.dataService.getCSVData()
     .subscribe((convertorInstance: Converter) => {
       convertorInstance.then((data) => {
-        this.csvData = data;
         this.initMapData(data);
       }, (csvError) => {
         console.error('Invalid CSV data');
@@ -52,11 +55,29 @@ export class HomeComponent implements OnInit {
       };
       featureCollection.features.push(feature);
     });
+    this.csvData = featureCollection;
+    this.activeItemIndex = 0;
     console.log(featureCollection);
+  }
+
+  goToMap() {
+    this.changeTab('Map');
   }
 
   changeTab(name: string) {
     this.currentTab = name;
+  }
+
+  previousItem() {
+    if (this.activeItemIndex !== 0) {
+      this.activeItemIndex--;
+    }
+  }
+
+  nextItem() {
+    if (this.activeItemIndex < this.csvData.features.length - 1) {
+      this.activeItemIndex++;
+    }
   }
 
 }
