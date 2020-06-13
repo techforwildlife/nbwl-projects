@@ -25,9 +25,9 @@
       </ng-template>
     </ngb-carousel>
 
-  <div class="page-content overflow-auto">
+  <div class="page-content overflow-auto" *ngIf="currentTab === 'Map'">
 
-    <div *ngIf="currentTab === 'Map'">
+    <div>
       Map
     </div>
 
