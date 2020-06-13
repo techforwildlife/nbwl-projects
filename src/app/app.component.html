@@ -1,11 +1,11 @@
 <nav class="nav nav-tabs nav-fill bg-light">
-  <a class="nav-item nav-link" 
-    href="#" (click)="changeTab('Stories')"
+  <a class="nav-item nav-link" role="button"
+    (click)="changeTab('Stories')"
     [ngClass]="{ 'active': currentTab === 'Stories' }">
     Stories
   </a>
-  <a class="nav-item nav-link" 
-    href="#" (click)="changeTab('Map')"
+  <a class="nav-item nav-link" role="button"
+    (click)="changeTab('Map')"
     [ngClass]="{ 'active': currentTab === 'Map' }">
     Map
   </a>
