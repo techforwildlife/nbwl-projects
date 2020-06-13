@@ -12,7 +12,7 @@
     </a>
   </nav>
 
-  <ngb-carousel #carousel class="h-100 w-100" [hidden]="currentTab !== 'Stories'"
+  <ngb-carousel #carousel class="page-content w-100" [hidden]="currentTab !== 'Stories'"
       [showNavigationIndicators]="'true'"
       (slide)="onSlide($event)">
       <ng-template ngbSlide *ngFor="let record of csvData.features; index as i">
