@@ -98,6 +98,26 @@ export class HomeComponent implements OnInit {
       type: 'geojson',
       data: this.csvData
     });
+    this.map.addLayer({
+      id: 'geojson-layer',
+      source: 'geojson-source',
+      type: 'circle',
+      paint: {
+        'circle-opacity': 1,
+        'circle-color': 'red',
+        'circle-radius': ['interpolate', ['linear'], ['zoom'],
+          10, 2,
+          17, 3,
+          22, 6
+        ],
+        'circle-stroke-color': 'red',
+        'circle-stroke-width': ['interpolate', ['linear'], ['zoom'],
+          10, 2,
+          17, 3,
+          22, 7
+        ]
+      }
+    });
   }
 
   goToLocation() {
