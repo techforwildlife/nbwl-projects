@@ -2,8 +2,19 @@
 
   <div #mapEl class="w-100 h-100"></div>
   <div #mapPopupEl class="map-popup">
-    <h3>Story - {{csvData.features[selectedIndex]?.properties?.index}}</h3>
-    {{csvData.features[selectedIndex]?.properties?.Story}}
+    <h5>{{csvData.features[selectedIndex]?.properties?.Area}}</h5>
+    <h6>
+      State: {{csvData.features[selectedIndex]?.properties?.State}}
+    </h6>
+    <h7>
+      Infrastructure type: {{csvData.features[selectedIndex]?.properties?.Type_of_Infrastructure}}
+    </h7><br>
+    <h7>
+      Area covered: {{csvData.features[selectedIndex]?.properties?.Area_to_be_cleared_in_ha}} ha
+    </h7><br>
+    <h7>
+      Agency: {{csvData.features[selectedIndex]?.properties?.Agency}}
+    </h7>
   </div>
 </div>
 
@@ -13,7 +24,12 @@
     <ng-template ngbSlide *ngFor="let record of csvData.features; index as i">
       <div class="row justify-content-center page-content overflow-auto bg-dark text-white">
         <div class="col-8">
-          <h3>Story - {{i}}</h3>
+          <h3>{{csvData.features[selectedIndex]?.properties?.Area}}</h3>
+          <h5>
+            {{csvData.features[selectedIndex]?.properties?.State}} - 
+            {{csvData.features[selectedIndex]?.properties?.Proposed_Project}}
+          </h5>
+          <hr class="border border-white m-0">
           {{record.properties?.Story}}
         </div>
       </div>

@@ -103,7 +103,7 @@ export class HomeComponent implements OnInit {
         geometry: {
           type: 'Point',
           // tslint:disable-next-line: radix
-          coordinates: [parseFloat(record.Long_4dig), parseFloat(record.Lat_4dig)]
+          coordinates: [parseFloat(record.Longitude), parseFloat(record.Latitude)]
         },
         properties: { ...record, index  }
       };
