@@ -15,18 +15,18 @@
     (slide)="onSlide($event)">
     <ng-template ngbSlide *ngFor="let record of csvData.features; index as i">
       <div class="row justify-content-center page-content overflow-auto bg-dark text-white">
-        <div class="col mx-1 pt-3 pb-5">
-          <h3>{{csvData.features[selectedIndex]?.properties?.Area}}</h3>
-          <h5>
+        <div class="col mx-2 pt-3 pb-5">
+          <h5>{{csvData.features[selectedIndex]?.properties?.Area}}</h5>
+          <h6>
             {{csvData.features[selectedIndex]?.properties?.State}} - 
             {{csvData.features[selectedIndex]?.properties?.Proposed_Project}}
-          </h5>
-          <h6>
+          </h6>
+          <p>
             {{csvData.features[selectedIndex]?.properties?.Agency}} - 
             {{csvData.features[selectedIndex]?.properties?.Area_to_be_cleared_in_ha}} ha
-          </h6>
+          </p>
           <hr class="border border-white m-0">
-          {{record.properties?.Story}}
+          <p class="text-justify font-weight-light text-monospace story-wrap">{{record.properties?.Story}}</p>
         </div>
       </div>
     </ng-template>
