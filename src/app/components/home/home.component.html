@@ -1,10 +1,8 @@
 <div class="w-100 h-100">
 
-  <div class="page-content overflow-auto" *ngIf="currentTab === 'Map'">
+  <div class="page-content overflow-auto" [hidden]="currentTab !== 'Map'">
 
-    <div>
-      Map
-    </div>
+    <div #mapEl class="w-100 h-100"></div>
 
   </div>
 
@@ -24,14 +22,12 @@
   <nav class="nav nav-tabs nav-fill bg-light nav-bar-size">
     <a class="nav-item nav-link" role="button"
       *ngIf="currentTab === 'Map'"
-      (click)="goToStoryTab()"
-      [ngClass]="{ 'active': currentTab === 'Stories' }">
+      (click)="goToStoryTab()">
       Go to story details
     </a>
     <a class="nav-item nav-link" role="button"
-    *ngIf="currentTab === 'Stories'"
-      (click)="goToMapTab()"
-      [ngClass]="{ 'active': currentTab === 'Map' }">
+      *ngIf="currentTab === 'Stories'"
+      (click)="goToMapTab()">
       View in Map
     </a>
   </nav>

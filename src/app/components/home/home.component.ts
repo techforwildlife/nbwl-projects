@@ -1,9 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { DataService } from 'src/services/data.service';
 import { Converter } from 'csvtojson/v2/Converter';
 import { FeatureCollection, Feature } from 'geojson';
 import { NgbCarousel, NgbSlideEvent } from '@ng-bootstrap/ng-bootstrap';
-import { timeStamp } from 'console';
+import { Map, Popup } from 'mapbox-gl';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -18,13 +19,16 @@ export class HomeComponent implements OnInit {
     features: []
   };
   public selectedIndex: number = null;
+  map: Map = null;
   @ViewChild('carousel', {static : true}) carousel: NgbCarousel;
+  @ViewChild('mapEl', { static: true }) mapEl: ElementRef<HTMLDivElement>;
 
   constructor(private dataService: DataService) {
 
   }
 
   ngOnInit() {
+    this.initMap();
     this.dataService.getCSVData()
     .subscribe((convertorInstance: Converter) => {
       convertorInstance.then((data) => {
@@ -36,6 +40,34 @@ export class HomeComponent implements OnInit {
     }, (error) => {
       console.error('Unable to fetch CSV data');
       this.csvData = null;
+    });
+  }
+
+  initMap() {
+    this.map = new Map({
+      container: this.mapEl.nativeElement,
+      // center: { lng: mapsettings.center.longitude, lat: mapsettings.center.latitude },
+      // zoom: mapsettings.zoom,
+      // accessToken: this.config.mapbox.accessToken,
+      // bearing: mapsettings.bearing,
+      // pitch: mapsettings.pitch,
+    });
+    this.map.addSource('base-map-source', {
+      type: 'raster',
+      tiles: ['a', 'b', 'c']
+        .map((abc) => `https://${abc}.tile.openstreetmap.org/{z}/{x}/{y}.png`)
+    });
+    this.map.addLayer({
+      id: 'background',
+      type: 'background',
+      paint: {
+        'background-color': 'black'
+      }
+    });
+    this.map.addLayer({
+      id: 'base-map',
+      type: 'raster',
+      source: 'base-map-source'
     });
   }
 
@@ -62,6 +94,10 @@ export class HomeComponent implements OnInit {
     this.selectedIndex = 0;
     this.carousel.pause();
     console.log(featureCollection);
+    this.map.addSource('geojson-source', {
+      type: 'geojson',
+      data: this.csvData
+    });
   }
 
   goToLocation() {
