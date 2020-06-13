@@ -46,11 +46,8 @@ export class HomeComponent implements OnInit {
   initMap() {
     this.map = new Map({
       container: this.mapEl.nativeElement,
-      // center: { lng: mapsettings.center.longitude, lat: mapsettings.center.latitude },
-      // zoom: mapsettings.zoom,
-      // accessToken: this.config.mapbox.accessToken,
-      // bearing: mapsettings.bearing,
-      // pitch: mapsettings.pitch,
+      center: { lng: 74.1240, lat: 15.2993 },
+      zoom: 10,
     });
     this.map.addSource('base-map-source', {
       type: 'raster',
