@@ -3,6 +3,7 @@ import { DataService } from 'src/services/data.service';
 import { Converter } from 'csvtojson/v2/Converter';
 import { FeatureCollection, Feature } from 'geojson';
 import { NgbCarousel, NgbSlideEvent } from '@ng-bootstrap/ng-bootstrap';
+import { timeStamp } from 'console';
 
 @Component({
   selector: 'app-home',
@@ -45,7 +46,7 @@ export class HomeComponent implements OnInit {
       features: []
     };
 
-    data.forEach((record) => {
+    data.forEach((record, index) => {
       const feature: Feature = {
         type: 'Feature',
         geometry: {
@@ -53,7 +54,7 @@ export class HomeComponent implements OnInit {
           // tslint:disable-next-line: radix
           coordinates: [parseFloat(record.Long_4dig), parseFloat(record.Lat_4dig)]
         },
-        properties: record
+        properties: { ...record, index  }
       };
       featureCollection.features.push(feature);
     });
@@ -63,8 +64,19 @@ export class HomeComponent implements OnInit {
     console.log(featureCollection);
   }
 
-  goToMap() {
+  goToLocation() {
+    const selectedLocation = this.csvData.features[this.selectedIndex];
+    console.log(selectedLocation);
+  }
+
+  goToMapTab() {
     this.changeTab('Map');
+    this.goToLocation();
+  }
+
+  goToStoryTab() {
+    this.changeTab('Stories');
+    this.selectSlide(this.selectedIndex);
   }
 
   changeTab(name: string) {

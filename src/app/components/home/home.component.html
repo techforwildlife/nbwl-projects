@@ -1,5 +1,13 @@
 <div class="w-100 h-100">
 
+  <div class="page-content overflow-auto" *ngIf="currentTab === 'Map'">
+
+    <div>
+      Map
+    </div>
+
+  </div>
+
   <ngb-carousel #carousel class="page-content w-100" [hidden]="currentTab !== 'Stories'"
       [showNavigationIndicators]="'true'"
       (slide)="onSlide($event)">
@@ -11,29 +19,22 @@
           </div>
         </div>
       </ng-template>
-    </ngb-carousel>
+  </ngb-carousel>
 
-  <div class="page-content overflow-auto" *ngIf="currentTab === 'Map'">
-
-    <div>
-      Map
-    </div>
-
-  </div>
-  
   <nav class="nav nav-tabs nav-fill bg-light nav-bar-size">
     <a class="nav-item nav-link" role="button"
       *ngIf="currentTab === 'Map'"
-      (click)="changeTab('Stories')"
+      (click)="goToStoryTab()"
       [ngClass]="{ 'active': currentTab === 'Stories' }">
-      Story detail
+      Go to story details
     </a>
     <a class="nav-item nav-link" role="button"
-      *ngIf="currentTab === 'Stories'"
-      (click)="changeTab('Map')"
+    *ngIf="currentTab === 'Stories'"
+      (click)="goToMapTab()"
       [ngClass]="{ 'active': currentTab === 'Map' }">
       View in Map
     </a>
   </nav>
+  
 </div>
   
