@@ -63,7 +63,8 @@ export class HomeComponent implements OnInit {
     this.map.addSource('base-map-source', {
       type: 'raster',
       tiles: ['https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
-      tileSize: 256
+      tileSize: 256,
+      attribution: 'Esri, Maxar, Earthstar Geographics, CNES/Airbus DS, USDA FSA, USGS, Aerogrid, IGN, IGP, and the GIS User Community'
     });
     this.map.addLayer({
       id: 'background',
