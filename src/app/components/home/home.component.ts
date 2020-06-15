@@ -62,8 +62,8 @@ export class HomeComponent implements OnInit {
     });
     this.map.addSource('base-map-source', {
       type: 'raster',
-      tiles: ['a', 'b', 'c']
-        .map((abc) => `https://${abc}.tile.openstreetmap.org/{z}/{x}/{y}.png`)
+      tiles: ['https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'],
+      tileSize: 256
     });
     this.map.addLayer({
       id: 'background',
