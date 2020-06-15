@@ -111,7 +111,7 @@ export class HomeComponent implements OnInit {
       featureCollection.features.push(feature);
     });
     this.csvData = featureCollection;
-    this.selectedIndex = this.csvData.features.length >= 7 ? 7 : 0;
+    this.selectedIndex = 0;
     this.carousel.pause();
     console.log(featureCollection);
     this.map.addSource('geojson-source', {
