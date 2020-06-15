@@ -127,7 +127,7 @@ export class HomeComponent implements OnInit {
         'circle-radius': [
           'let', 'area_covered',  ['to-number', ['get', 'Area_to_be_cleared_in_ha']],
           ['interpolate', ['linear'], ['var', 'area_covered'],
-            0, 3,
+            0, 4,
             1000, 15,
             2000, 20]
         ],
