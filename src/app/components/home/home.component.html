@@ -1,7 +1,7 @@
 <div class="page-content overflow-auto" [hidden]="currentTab !== 'Map'">
 
   <div #mapEl class="w-100 h-100"></div>
-  <div #mapPopupEl class="map-popup">
+  <div #mapPopupEl>
     <h5>{{csvData.features[selectedIndex]?.properties?.Area}}</h5>
     <b>State:</b> {{csvData.features[selectedIndex]?.properties?.State}}<br>
     <b>Infrastructure type:</b> {{csvData.features[selectedIndex]?.properties?.Type_of_Infrastructure}}<br>
