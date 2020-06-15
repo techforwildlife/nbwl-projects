@@ -122,18 +122,20 @@ export class HomeComponent implements OnInit {
       source: 'geojson-source',
       type: 'circle',
       paint: {
-        'circle-opacity': 1,
+        'circle-opacity': 0.7,
         'circle-color': 'red',
-        'circle-radius': ['interpolate', ['linear'], ['zoom'],
-          10, 2,
-          17, 3,
-          22, 6
+        'circle-radius': [
+          'let', 'area_covered',  ['to-number', ['get', 'Area_to_be_cleared_in_ha']],
+          ['interpolate', ['linear'], ['var', 'area_covered'],
+            0, 3,
+            1000, 15,
+            2000, 20]
         ],
-        'circle-stroke-color': 'red',
+        'circle-stroke-color': 'white',
         'circle-stroke-width': ['interpolate', ['linear'], ['zoom'],
-          10, 2,
-          17, 3,
-          22, 7
+          10, 1,
+          17, 1.5,
+          22, 3.5
         ]
       }
     });
