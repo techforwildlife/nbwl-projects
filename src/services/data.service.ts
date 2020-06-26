@@ -20,7 +20,7 @@ export class DataService {
         };
 
         // tslint:disable-next-line: max-line-length
-        return this.http.get('https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8LnLZGC9-KBpNHuCU-wIYVb9c4eb0GCZY4WEuDKqmmuVR1mNxaRuLnkblXV-Oioqqo-iBfTu0JFYQ/pub?gid=0&single=true&output=csv', options)
+        return this.http.get('https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8LnLZGC9-KBpNHuCU-wIYVb9c4eb0GCZY4WEuDKqmmuVR1mNxaRuLnkblXV-Oioqqo-iBfTu0JFYQ/pub?gid=0&single=true&output=csv&ndplr=1')
         .pipe(
             map((rawResponse: any) => {
                 if ('TextDecoder' in window) {
