@@ -5,6 +5,7 @@ import { FeatureCollection, Feature } from 'geojson';
 import { NgbCarousel, NgbSlideEvent } from '@ng-bootstrap/ng-bootstrap';
 import { Map, Popup } from 'mapbox-gl';
 import { map } from 'rxjs/operators';
+const csv = require('../../../../node_modules/jquery-csv/src/jquery.csv.min.js');
 
 @Component({
   selector: 'app-home',
@@ -36,13 +37,9 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.initMap();
     this.dataService.getCSVData()
-    .subscribe((convertorInstance: Converter) => {
-      convertorInstance.then((data) => {
-        this.initMapData(data);
-      }, (csvError) => {
-        console.error('Invalid CSV data');
-        this.csvData = null;
-      });
+    .subscribe((input: any) => {
+      const data = csv.toObjects(input);
+      this.initMapData(data);
     }, (error) => {
       console.error('Unable to fetch CSV data');
       this.csvData = null;

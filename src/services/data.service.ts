@@ -13,29 +13,13 @@ export class DataService {
             observe?: 'body';
             params?: HttpParams;
             reportProgress?: boolean;
-            responseType: 'arraybuffer';
+            responseType: 'text';
             withCredentials?: boolean;
         } = {
-            responseType: 'arraybuffer'
+            responseType: 'text'
         };
 
         // tslint:disable-next-line: max-line-length
-        return this.http.get('https://docs.google.com/spreadsheets/d/e/2PACX-1vQ8LnLZGC9-KBpNHuCU-wIYVb9c4eb0GCZY4WEuDKqmmuVR1mNxaRuLnkblXV-Oioqqo-iBfTu0JFYQ/pub?gid=0&single=true&output=csv&ndplr=1')
-        .pipe(
-            map((rawResponse: any) => {
-                if ('TextDecoder' in window) {
-                  // Decode as UTF-8
-                  const dataView = new DataView(rawResponse);
-                  const decoder = new TextDecoder('utf8');
-                  const decodedString = decoder.decode(dataView);
-                  return csv().fromString(decodedString);
-                } else {
-                  // Fallback decode as ASCII
-                  const decodedString = String.fromCharCode.apply(null, new Uint8Array(rawResponse));
-                  return csv().fromString(decodedString);
-                }
-                return null;
-              })
-         );
+        return this.http.get('https://docs.google.com/spreadsheets/d/1RPCryGL8_eO0Mfv3JAagKYoEuk2fQN7FIpPXfOxZv_w/gviz/tq?tqx=out:csv&sheet=Sheet1', options)
     }
 }
